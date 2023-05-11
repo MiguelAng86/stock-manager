@@ -5,21 +5,21 @@ CREATE TABLE product (
 
 CREATE TABLE size (
     id int NOT NULL PRIMARY KEY,
-    productId int,
-    backSoon BOOLEAN,
+    product_id int,
+    backsoon BOOLEAN,
     special BOOLEAN,
-    FOREIGN KEY (productId) REFERENCES product
+    FOREIGN KEY (product_id) REFERENCES product
 );
 
 CREATE TABLE stock (
-  sizeId int,
+  size_id int,
   quantity int,
-  FOREIGN KEY (sizeId) REFERENCES size
+  FOREIGN KEY (size_id) REFERENCES size
 );
 
 INSERT INTO product SELECT * FROM CSVREAD('classpath:db/migration/product.csv', 'id, sequence');
-INSERT INTO size SELECT * FROM CSVREAD('classpath:db/migration/size.csv', 'id, productId, backSoon, special');
-INSERT INTO stock SELECT * FROM CSVREAD('classpath:db/migration/stock.csv', 'sizeId, quantity');
+INSERT INTO size SELECT * FROM CSVREAD('classpath:db/migration/size.csv', 'id, product_id, backsoon, special');
+INSERT INTO stock SELECT * FROM CSVREAD('classpath:db/migration/stock.csv', 'size_id, quantity');
 
 
 
